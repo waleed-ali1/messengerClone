@@ -4,8 +4,8 @@ import './App.css';
 class App extends Component {
  
     state= {
-      input :""
-
+      input :"",
+      messages : []
     }
 
     inputHandler = (event ) =>{
@@ -13,15 +13,55 @@ class App extends Component {
       this.setState({
         input : event.target.value
       });
-      
+    
+    }
+
+     
+    sendMessage = () => {
+
+      const newMessagesArray = [...this.state.messages];
+      newMessagesArray.push(this.state.input);
+      this.setState({
+        messages : newMessagesArray
+      });
+      // return newMessagesArray;
+      console.log(newMessagesArray);
 
     }
+
+   
   render() {
+
+    // const messagesList = () =>{
+
+    //   this.state.messages.map(msg =>{
+    //     return(
+    //       <p>{msg}</p>
+    //     )
+    //   })
+
+    // }
+
     return (
       <div className="App">
       
+      <form> 
       <input type="text" value={this.state.input} onChange={this.inputHandler}/>
+
+      <button onClick={this.sendMessage}> Send Message</button>
+
+      </form>
+
+        {this.state.messages.map( msg => {
+          return(
+          <p>{msg}</p>
+          )
+        }) }
       
+  
+
+
+
       </div>
     );
   }
