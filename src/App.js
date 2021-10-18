@@ -5,6 +5,11 @@ import FormControl from '@material-ui/core/FormControl';
 import  InputLabel from '@material-ui/core/InputLabel';
 import  Input from '@material-ui/core/Input';
 import Message from './Components/Message';
+import db from './firebase';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import FlipMove from 'react-flip-move';
 
 
 
@@ -16,22 +21,7 @@ class App extends Component {
        input :"",
        username:"",
       messages : [
-        {
-          input:"heyy first object",
-          username:"walid"
-
-        },
-
-        {
-          input:"heyyy",
-          username:"ziad"
-
-        },
-        {
-          input:"heyyy",
-          username:"mhamad"
-
-        }
+ 
       ]
     }
 
@@ -59,16 +49,37 @@ class App extends Component {
                     username:newUsername
                     });
       //newArrObject.push(this.state.messages);
+      db.collection('users').add({
+        input : this.state.input,
+        username: this.state.username,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      // this.setState({
+      //   messages : 
       this.setState({
-        messages : newObj,
         input:""
-      });
-
+      })
       // return newMessagesArray;
-      console.log(newObj);
+      //console.log(newObj);
 
     }
 
+    
+      componentDidMount = () => {
+     
+
+      db.collection('users').orderBy('timestamp','desc').onSnapshot(snapshot => {
+
+        this.setState({
+          messages : snapshot.docs.map(doc => doc.data())
+        })
+        // const newObj = [...this.state.messages];
+        // newObj.push(snapshot.docs.map(doc => doc.data()));
+        // console.log(newObj);
+       })
+       
+      }
+    
 
     componentWillMount = () => {
 
@@ -76,6 +87,7 @@ class App extends Component {
       this.setState({
         username : user 
       })
+     
     }
 
      
@@ -99,6 +111,7 @@ class App extends Component {
       {
         this.state.messages.map(msg => {
           return(
+          
             <Message username={this.state.username} msg={msg}/>
           )
         })  
