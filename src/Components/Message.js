@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import './Message.css';
 
-const Message = (props) => {
+const Message = forwardRef((props) => {
 
 
   const isUser = props.username === props.msg.username;
@@ -16,7 +16,7 @@ const Message = (props) => {
               <Typography color ="white"
               variant="h5"
               component="h2">
-                {props.msg.username} : {props.msg.input}
+                { !isUser && `${props.msg.username || 'Unknown_User'}: `} {props.msg.input}
                 </Typography>
 
             </CardContent>
@@ -26,6 +26,6 @@ const Message = (props) => {
       
         
     )
-}
+})
 
 export default Message

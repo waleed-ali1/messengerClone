@@ -1,16 +1,18 @@
 import React,  { Component } from 'react';
 import './App.css';
-import Button /*, FormControl, InputLabel, Input }*/ from '@material-ui/core/Button';
+// import Button /*, FormControl, InputLabel, Input }*/ from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
-import  InputLabel from '@material-ui/core/InputLabel';
+// import  InputLabel from '@material-ui/core/InputLabel';
 import  Input from '@material-ui/core/Input';
 import Message from './Components/Message';
 import db from './firebase';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import FlipMove from 'react-flip-move';
-
+import SendIcon from '@material-ui/icons/Send';
+//import SendToMobileIcon from '@material-ui/core/SendToMobile';
+import {IconButton} from '@material-ui/core';
+// import MenuIcon from '@material-ui/icons/Menu';
 
 
  
@@ -100,11 +102,16 @@ class App extends Component {
         
         <h2 className="greeting"> Welcome {this.state.username}</h2>
       
-      <form>
-          <FormControl>
-            <InputLabel > Enter a message ... </InputLabel>
-            <Input value={this.state.input} onChange={this.inputHandler} />
-            <Button disabled={!this.state.input} variant="contained" onClick={this.sendMessage} color="primary" type="submit">Send</Button>
+      <form className="app__form">
+          <FormControl className="app__formControll">
+
+            {/* <InputLabel > Enter a message ... </InputLabel> */}
+            <Input className="app__input" placeholder="Enter a message ..." value={this.state.input} onChange={this.inputHandler} />
+
+            <IconButton className="app__iconButton" disabled={!this.state.input} Value="send" variant="contained" onClick={this.sendMessage} color="primary" type="submit" >
+              <SendIcon/>
+              </IconButton>
+            {/* <Button disabled={!this.state.input} variant="contained" onClick={this.sendMessage} color="primary" type="submit">Send</Button> */}
           </FormControl>
       </form>
   
