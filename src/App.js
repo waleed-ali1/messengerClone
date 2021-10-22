@@ -100,7 +100,7 @@ class App extends Component {
     return (
       <div className="App">
         
-        <h2 className="greeting"> Welcome {this.state.username}</h2>
+        <h2 className="greeting"> Welcome to the chat {this.state.username}</h2>
       
       <form className="app__form">
           <FormControl className="app__formControll">

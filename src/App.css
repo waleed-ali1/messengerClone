@@ -3,7 +3,9 @@
 }
 
 .greeting{
-  color:red;
+  color:black;
+  font-weight: bold;
+  font-family:monospace ;
 }
  
 
@@ -26,7 +28,7 @@ margin: 20px;
 }
 
 .app__input{
-  flex:0.95;
+  flex:0.90;
 }
 
 .app__iconButton{
